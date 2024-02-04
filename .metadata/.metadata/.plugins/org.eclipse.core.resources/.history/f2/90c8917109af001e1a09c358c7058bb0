@@ -1,0 +1,24 @@
+package OrangeHRMTest;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.BeforeTest;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Selenium4Features {
+	
+	
+	@BeforeTest
+	public void BeforeTest() {
+		
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--remote-allow-origins=*"); 
+		driver= new ChromeDriver(chromeOptions);
+		System.setProperty("webdriver.http.factory", "jdk-http-client");
+		driver.manage().window().maximize();
+		
+	}
+
+}

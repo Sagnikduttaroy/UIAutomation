@@ -1,0 +1,77 @@
+package OrangeHRMTest;
+
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import OrangeHRM.Pages.AdminPanel;
+import OrangeHRM.Pages.LoginPage;
+import OrangeHRM.Pages.SeleniumHelper;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Selenium4Features {
+
+	WebDriver driver;
+
+	String Url="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+	String UserName="Admin";
+	String UserPassword="admin123";
+
+	LoginPage _loginPage;
+	SeleniumHelper _SeleniumHelper;
+	AdminPanel _AdminPanel;
+	
+
+	@BeforeTest
+	public void BeforeTest() {
+
+		WebDriverManager.chromedriver().setup();
+		driver= new ChromeDriver();
+		driver.manage().window().maximize();		
+		System.out.println("Test starts successfully");
+		_loginPage= new LoginPage(driver);
+		_SeleniumHelper = new SeleniumHelper(driver);
+		_AdminPanel= new AdminPanel(driver);
+
+
+	}
+	
+	
+	//@Test
+	public void TakeScreenshot() throws IOException {
+		_loginPage.OpenUrl(Url);
+		_loginPage.getScreenshot();
+		driver.quit();
+
+
+	}
+	
+	
+	//@Test
+	public void OpenANewWindow() throws InterruptedException {
+
+		_loginPage.OpenUrl(Url);
+		driver.switchTo().newWindow(WindowType.TAB);
+		driver.navigate().to("http://www.amazon.in");
+
+		Thread.sleep(5000);
+		driver.quit();
+	}
+	@Test
+	public void getLocation() throws IOException {
+		_loginPage.OpenUrl(Url);
+		_loginPage.getLocationOfLogo();
+		driver.quit();
+		
+	}
+	
+	public void RelativeLocators() {
+		
+		
+	}
+
+}

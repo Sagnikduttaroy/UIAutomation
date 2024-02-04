@@ -1,0 +1,109 @@
+package OrangeHRM.Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import net.bytebuddy.implementation.bind.annotation.Super;
+
+public class AdminPanel extends SeleniumHelper{
+
+
+	WebDriver driver;
+
+
+
+	//Objects
+	@FindBy(xpath="//a[@class='oxd-main-menu-item active']//span")
+	WebElement btnAdmin;	
+	@FindBy(xpath="//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']")
+	WebElement txtAdmin;	
+	@FindBy(xpath="//button[contains(.,'Add')]")
+	WebElement btnAdd;
+	@FindBy(xpath="//label[contains(.,'User Role')]/following::div/div/div/div")
+	WebElement drpUserRole;
+	@FindBy(xpath="//label[contains(.,'Status')]/following::div/div/div/div")
+	WebElement drpStatus;
+	@FindBy(xpath="//label[contains(.,'Employee Name')]/following::input")
+	WebElement txtEmployeeName;
+	@FindBy(xpath="//label[contains(.,'Username')]/following::input")
+	WebElement txtUserName;
+	@FindBy(xpath="//label[contains(.,'Password')]/following::input")
+	WebElement txtPassword;
+	@FindBy(xpath="//label[contains(.,'Confirm Password')]/following::input")
+	WebElement txtConfirmPassword;
+	@FindBy(xpath="//button[@type='submit']")
+	WebElement btnSave;
+	@FindBy(xpath="//div[@class='oxd-autocomplete-option']")
+	WebElement txtMatch;
+	@FindBy(xpath="//span[@class='oxd-topbar-header-breadcrumb']")
+	WebElement txtDashboard;
+	By txtDrpValues(String values) {
+
+		return By.xpath("//div[@role='option']/span[contains(.,'"+values+"')]");
+	}
+	By btnMenu(String Menu) {
+
+		return By.xpath("//span[text()='"+Menu+"']");
+	}
+	
+	By tbSearch= By.xpath("");
+
+
+
+
+	// End of Objects
+
+
+
+
+	public AdminPanel(WebDriver driver) {
+
+		super(driver);
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+
+	}
+
+	public void ClickOnMenu(String Menu) {
+		
+		
+		Click(btnMenu(Menu));
+			
+
+	}
+	
+	public Boolean VerifyDashboardPage() {
+
+		WaitTillElementFound(txtDashboard);
+		return IsElementPresent(txtDashboard);
+	}
+
+	public void ClickOnAddButtnAndAddUser(String UserRole, String Status,String EmployeeName, String UserName, String PassWord) {
+
+
+		WaitTillElementFound(txtAdmin);
+		Click(btnAdd);
+		WaitTillElementFound(txtAdmin);
+		WaitTillElementFound(drpUserRole);
+		Click(drpUserRole);		
+		Click(txtDrpValues(UserRole));
+		Click(drpStatus);
+		Click(txtDrpValues(Status));
+		TextEnter(txtEmployeeName, EmployeeName);
+		WaitTillElementFound(txtMatch);
+		Click(txtMatch);
+		TextEnter(txtUserName, UserName);
+		TextEnter(txtPassword, PassWord);
+		TextEnter(txtConfirmPassword, PassWord);
+
+		Click(btnSave);
+
+
+
+	}
+
+
+}
