@@ -1,0 +1,37 @@
+package OrangeHRMTest;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+
+import OrangeHRM.Pages.LoginPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Selenium4Features {
+
+	WebDriver driver;
+	
+	String Url="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+	String UserName="Admin";
+	String UserPassword="admin123";
+	
+ LoginPage _loginPage;
+ 
+	@BeforeTest
+	public void BeforeTest() {
+
+		WebDriverManager.chromedriver().setup();
+		driver= new ChromeDriver();
+		driver.manage().window().maximize();		
+		System.out.println("Test starts successfully");
+		_loginPage= new LoginPage(driver);
+
+
+	}
+
+	public void TakeScreenshot() {
+		_LoginPage.OpenUrl(Url);
+
+	}
+
+}

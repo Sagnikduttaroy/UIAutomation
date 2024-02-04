@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automation Suite" parallel="tests" thread-count="6">
+  <test name="Web Automation">
+	  <parameter name="URL" value="http://tutorialsninja.com/demo/"/>
+	  <classes>
+		  <class name="TestNgTest.BaseSelenium"/>
+	  </classes>
+  
+  </test>
+</suite> 
+	
